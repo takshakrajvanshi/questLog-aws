@@ -11,12 +11,26 @@ const cloudinary = require("cloudinary").v2;
 
 const app = express();
 
-app.use(
-  cors({
-    origin: "*",
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "http://localhost:3000",
+      "http://localhost:5000",
+      "http://13.232.72.162",
+      "https://gamify-pp891.netlify.app",
+      "https://gamify-kveb.onrender.com",
+    ];
+    
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
