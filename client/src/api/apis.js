@@ -1,27 +1,28 @@
-const BASE_URL = "https://gamify-kveb.onrender.com/api/v1";
+const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API_BASE = `${BASE_URL}/api/v1`;
 
 export const authEndpoints = {
-  SIGNUP_API: `${BASE_URL}/auth/signup`,
-  SIGNIN_API: `${BASE_URL}/auth/signin`,
-  LOGOUT_API: `${BASE_URL}/auth/logout`,
+  SIGNUP_API: `${API_BASE}/auth/signup`,
+  SIGNIN_API: `${API_BASE}/auth/signin`,
+  LOGOUT_API: `${API_BASE}/auth/logout`,
 };
 
 export const settingEndpoints = {
-  UPDATE_PROFILE_PICTURE_API: `${BASE_URL}/profile/updateProfilePicture`,
-  UPDATE_PROFILE_API: `${BASE_URL}/profile/updateProfile`,
+  UPDATE_PROFILE_PICTURE_API: `${API_BASE}/profile/updateProfilePicture`,
+  UPDATE_PROFILE_API: `${API_BASE}/profile/updateProfile`,
 };
 
 export const gamesEndpoints = {
-  GET_ALL_GAMES_API: `${BASE_URL}/games/getAllGames`,
-  GET_GAME_BY_ID_API: `${BASE_URL}/games/getGameById`,
+  GET_ALL_GAMES_API: `${API_BASE}/games/getAllGames`,
+  GET_GAME_BY_ID_API: `${API_BASE}/games/getGameById`,
 };
 
 export const orderEndPoints = {
-  CREATE_ORDER_API: `${BASE_URL}/order/createOrder`,
-  GET_USER_ORDERS_API: `${BASE_URL}/order/getUserOrders`,
+  CREATE_ORDER_API: `${API_BASE}/order/createOrder`,
+  GET_USER_ORDERS_API: `${API_BASE}/order/getUserOrders`,
 };
 
 export const paymentEndPoints = {
-  PROCESS_PAYMENT_API: `${BASE_URL}/payment/process`,
-  STRIPE_API: `${BASE_URL}/payment/stripeapi`,
+  PROCESS_PAYMENT_API: `${API_BASE}/payment/process`,
+  STRIPE_API: `${API_BASE}/payment/stripeapi`,
 };
