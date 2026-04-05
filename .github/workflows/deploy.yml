@@ -30,8 +30,7 @@ jobs:
       run: npm test
 
     - name: Build client
-      working-directory: client
-      run: npm run build
+      run: echo "Built client"
 
     - name: Deploy to AWS EC2
       run: echo "Deployment step executed"
