@@ -85,11 +85,22 @@ const signin = asyncHandler(async (req, res) => {
 
     const comparedPassword = await bcrypt.compare(password, user.password);
 
+    const jwtSecret = process.env.JWT_SECRET_KEY;
+    const jwtExpire = process.env.JWT_EXPIRE || "3d";
+
+    if (!jwtSecret) {
+      console.error("JWT_SECRET_KEY is missing in environment.");
+      return res.status(500).json({
+        success: false,
+        msg: "Server configuration error: JWT secret key is not set.",
+      });
+    }
+
     if (comparedPassword) {
       const access_token = jwt.sign(
         { id: user._id, email: user.email, role: user.role },
-        process.env.JWT_SECRET_KEY,
-        { expiresIn: process.env.JWT_EXPIRE }
+        jwtSecret,
+        { expiresIn: jwtExpire }
       );
 
       (user.token = access_token), (user.password = undefined);
